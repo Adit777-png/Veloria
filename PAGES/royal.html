@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Evening Elegance - Veloria</title>
+    <title>Royal Heritage - Veloria</title>
     <style>
         * {
             margin: 0;
@@ -13,8 +13,8 @@
 
         body {
             font-family: 'Cormorant Garamond', 'Georgia', serif;
-            background-color: #f8f6f4;
-            color: #4a3f4f;
+            background: linear-gradient(to bottom, #0a0015 0%, #1a0a2e 50%, #0a0015 100%);
+            color: #ffd700;
             overflow-x: hidden;
         }
 
@@ -24,11 +24,12 @@
             justify-content: space-between;
             align-items: center;
             padding: 1.5rem 5%;
-            background-color: #4a3f4f;
+            background: linear-gradient(135deg, #0a0015 0%, #16213e 100%);
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.2);
+            border-bottom: 2px solid #ffd700;
         }
 
         .logo {
@@ -44,9 +45,10 @@
 
         .logo-text {
             font-size: 2rem;
-            color: #e8dcc7;
-            letter-spacing: 2px;
+            color: #ffd700;
+            letter-spacing: 3px;
             font-weight: 300;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
         }
 
         .nav-links {
@@ -56,7 +58,7 @@
         }
 
         .nav-links a {
-            color: #e8dcc7;
+            color: #ffd700;
             text-decoration: none;
             font-size: 1rem;
             letter-spacing: 1px;
@@ -74,12 +76,13 @@
             left: 0;
             width: 0;
             height: 2px;
-            background-color: #d4af37;
+            background: linear-gradient(90deg, #ffd700, #fff);
             transition: width 0.3s ease;
         }
 
         .nav-links a:hover {
-            color: #d4af37;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
         }
 
         .nav-links a:hover::after {
@@ -94,21 +97,23 @@
         .nav-icons button {
             background: none;
             border: none;
-            color: #e8dcc7;
+            color: #ffd700;
             font-size: 1.2rem;
             cursor: pointer;
-            transition: color 0.3s;
+            transition: all 0.3s;
         }
 
         .nav-icons button:hover,
         .nav-icons a:hover {
-            color: #d4af37;
+            color: #fff;
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.8));
         }
 
         .nav-icons a {
-            color: #e8dcc7;
+            color: #ffd700;
             font-size: 1.2rem;
-            transition: color 0.3s;
+            transition: all 0.3s;
             text-decoration: none;
         }
 
@@ -116,17 +121,17 @@
         .breadcrumb {
             padding: 2rem 5%;
             font-size: 0.95rem;
-            color: #6b5b73;
+            color: #c9b037;
         }
 
         .breadcrumb a {
-            color: #6b5b73;
+            color: #c9b037;
             text-decoration: none;
             transition: color 0.3s;
         }
 
         .breadcrumb a:hover {
-            color: #d4af37;
+            color: #ffd700;
         }
 
         .breadcrumb span {
@@ -135,48 +140,68 @@
 
         /* Collection Header */
         .collection-header {
-            background: linear-gradient(135deg, #4a3f4f 0%, #6b5b73 100%);
-            padding: 4rem 5%;
+            background: linear-gradient(135deg, #0f0a1e 0%, #1a0033 50%, #0a0015 100%);
+            padding: 5rem 5%;
             text-align: center;
-            color: #e8dcc7;
+            color: #ffd700;
             position: relative;
             overflow: hidden;
+            border-top: 3px solid #ffd700;
+            border-bottom: 3px solid #ffd700;
         }
 
         .collection-header::before {
-            content: '🌙';
+            content: '👑';
             position: absolute;
-            font-size: 15rem;
-            opacity: 0.05;
+            font-size: 20rem;
+            opacity: 0.1;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.1; }
+            50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.15; }
         }
 
         .collection-header h1 {
-            font-size: 3.5rem;
+            font-size: 4.5rem;
             font-weight: 300;
-            letter-spacing: 4px;
-            margin-bottom: 1rem;
+            letter-spacing: 8px;
+            margin-bottom: 1.5rem;
             position: relative;
             animation: fadeInUp 0.8s ease-out;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            color: #ffd700;
+        }
+
+        .collection-header h1::before,
+        .collection-header h1::after {
+            content: '✦';
+            margin: 0 2rem;
+            font-size: 2rem;
+            vertical-align: middle;
         }
 
         .collection-header p {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             letter-spacing: 2px;
-            color: #d4af37;
-            max-width: 700px;
+            color: #e8d5a3;
+            max-width: 800px;
             margin: 0 auto;
-            line-height: 1.8;
+            line-height: 2;
             animation: fadeInUp 1s ease-out;
+            font-style: italic;
         }
 
         .product-count {
-            margin-top: 1.5rem;
-            font-size: 1rem;
-            letter-spacing: 1px;
-            opacity: 0.9;
+            margin-top: 2rem;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            color: #c9b037;
+            text-transform: uppercase;
         }
 
         @keyframes fadeInUp {
@@ -193,8 +218,8 @@
         /* Filter and Sort Section */
         .controls-section {
             padding: 2.5rem 5%;
-            background-color: white;
-            border-bottom: 1px solid #e8dcc7;
+            background: linear-gradient(135deg, #1a0033 0%, #0f0a1e 100%);
+            border-bottom: 2px solid #ffd700;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -212,14 +237,14 @@
         .filter-label {
             font-size: 1.1rem;
             letter-spacing: 1px;
-            color: #4a3f4f;
+            color: #ffd700;
         }
 
         .filter-select {
             padding: 0.7rem 2rem;
-            border: 2px solid #4a3f4f;
-            background-color: transparent;
-            color: #4a3f4f;
+            border: 2px solid #ffd700;
+            background: rgba(255, 215, 0, 0.1);
+            color: #ffd700;
             font-family: 'Cormorant Garamond', 'Georgia', serif;
             font-size: 1rem;
             cursor: pointer;
@@ -229,7 +254,8 @@
 
         .filter-select:hover,
         .filter-select:focus {
-            border-color: #d4af37;
+            background: rgba(255, 215, 0, 0.2);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
             outline: none;
         }
 
@@ -247,14 +273,15 @@
         }
 
         .product-card {
-            background-color: white;
-            border-radius: 10px;
+            background: linear-gradient(135deg, #0a0015 0%, #1a0033 100%);
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.15);
             transition: all 0.4s ease;
             cursor: pointer;
             opacity: 0;
             animation: fadeInScale 0.6s ease-out forwards;
+            border: 2px solid rgba(255, 215, 0, 0.3);
         }
 
         .product-card:nth-child(1) { animation-delay: 0.1s; }
@@ -278,39 +305,43 @@
         }
 
         .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            transform: translateY(-15px);
+            box-shadow: 0 20px 50px rgba(255, 215, 0, 0.3);
+            border-color: #ffd700;
         }
 
         .product-image {
             height: 400px;
-            background: linear-gradient(135deg, #6b5b73, #8b7b8f);
+            background: linear-gradient(135deg, #1a0033, #3d1f6b, #1a0033);
             position: relative;
             overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #e8dcc7;
-            font-size: 1rem;
-            letter-spacing: 1px;
+            color: #ffd700;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
         }
 
         .product-badge {
             position: absolute;
             top: 15px;
             left: 15px;
-            background-color: #d4af37;
-            color: #4a3f4f;
-            padding: 0.4rem 1rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            letter-spacing: 1px;
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            color: #0a0015;
+            padding: 0.5rem 1.2rem;
+            border-radius: 25px;
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
             font-weight: bold;
             z-index: 2;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+            text-transform: uppercase;
         }
 
         .product-badge.sale {
-            background-color: #c9302c;
+            background: linear-gradient(135deg, #dc143c, #ff6b6b);
             color: white;
         }
 
@@ -319,17 +350,19 @@
             bottom: -50px;
             left: 50%;
             transform: translateX(-50%);
-            background-color: #4a3f4f;
-            color: #e8dcc7;
-            padding: 0.8rem 2rem;
+            background: linear-gradient(135deg, #ffd700, #c9b037);
+            color: #0a0015;
+            padding: 1rem 2.5rem;
             border: none;
             cursor: pointer;
             transition: all 0.3s;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             text-transform: uppercase;
             font-size: 0.85rem;
             font-family: 'Cormorant Garamond', 'Georgia', serif;
             z-index: 3;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
         }
 
         .product-card:hover .product-quick-view {
@@ -337,8 +370,9 @@
         }
 
         .product-quick-view:hover {
-            background-color: #d4af37;
-            color: #4a3f4f;
+            background: linear-gradient(135deg, #fff, #ffd700);
+            transform: translateX(-50%) scale(1.05);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.5);
         }
 
         .product-info {
@@ -346,29 +380,30 @@
         }
 
         .product-category {
-            color: #d4af37;
+            color: #c9b037;
             font-size: 0.85rem;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             text-transform: uppercase;
             margin-bottom: 0.5rem;
         }
 
         .product-name {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: 300;
             letter-spacing: 1px;
             margin-bottom: 0.8rem;
-            color: #4a3f4f;
-            transition: color 0.3s;
+            color: #ffd700;
+            transition: all 0.3s;
         }
 
         .product-card:hover .product-name {
-            color: #d4af37;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
         }
 
         .product-description {
             font-size: 0.95rem;
-            color: #6b5b73;
+            color: #e8d5a3;
             line-height: 1.6;
             margin-bottom: 1rem;
         }
@@ -381,15 +416,16 @@
         }
 
         .current-price {
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: bold;
-            color: #4a3f4f;
+            color: #ffd700;
             letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
         }
 
         .original-price {
             font-size: 1.3rem;
-            color: #999;
+            color: #c9b037;
             text-decoration: line-through;
         }
 
@@ -403,14 +439,15 @@
             width: 25px;
             height: 25px;
             border-radius: 50%;
-            border: 2px solid transparent;
+            border: 2px solid rgba(255, 215, 0, 0.3);
             cursor: pointer;
             transition: all 0.3s;
         }
 
         .color-dot:hover {
-            border-color: #d4af37;
+            border-color: #ffd700;
             transform: scale(1.2);
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
         }
 
         .product-rating {
@@ -418,21 +455,23 @@
             align-items: center;
             gap: 0.5rem;
             font-size: 0.9rem;
-            color: #6b5b73;
+            color: #c9b037;
         }
 
         .stars {
-            color: #d4af37;
+            color: #ffd700;
             letter-spacing: 2px;
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
         }
 
         /* Footer */
         footer {
-            background-color: #4a3f4f;
-            color: #e8dcc7;
+            background: linear-gradient(135deg, #0a0015 0%, #1a0033 100%);
+            color: #ffd700;
             padding: 3rem 5%;
             text-align: center;
             margin-top: 5rem;
+            border-top: 3px solid #ffd700;
         }
 
         .footer-content {
@@ -447,24 +486,27 @@
             font-weight: 300;
             letter-spacing: 2px;
             margin-bottom: 1rem;
+            color: #ffd700;
         }
 
         .footer-section p, .footer-section a {
-            color: #e8dcc7;
+            color: #e8d5a3;
             text-decoration: none;
             line-height: 2;
             transition: color 0.3s;
         }
 
         .footer-section a:hover {
-            color: #d4af37;
+            color: #ffd700;
+            text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
         }
 
         .footer-bottom {
             padding-top: 2rem;
-            border-top: 1px solid rgba(232, 220, 199, 0.2);
+            border-top: 1px solid rgba(255, 215, 0, 0.3);
             font-size: 0.9rem;
             letter-spacing: 1px;
+            color: #c9b037;
         }
 
         /* Responsive */
@@ -512,14 +554,14 @@
         <span>/</span>
         <a href="collections.html">Collections</a>
         <span>/</span>
-        <span>Evening Elegance</span>
+        <span>Royal Heritage</span>
     </div>
 
     <!-- Collection Header -->
     <section class="collection-header">
-        <h1>EVENING ELEGANCE</h1>
-        <p>Sophisticated pieces designed for unforgettable nights. Each dress tells a story of grace and refined beauty.</p>
-        <div class="product-count">24 Exquisite Pieces</div>
+        <h1>ROYAL HERITAGE</h1>
+        <p>Where timeless elegance meets sovereign grace. Each gown is a masterpiece befitting royalty, designed for those who command attention and embody regal sophistication.</p>
+        <div class="product-count">✦ 18 Majestic Creations ✦</div>
     </section>
 
     <!-- Filter and Sort Controls -->
@@ -551,302 +593,200 @@
     <section class="products-section">
         <div class="products-grid">
             <!-- Product 1 -->
-            <div class="product-card" data-price="299">
+            <div class="product-card" data-id="rh001" data-name="Imperial Gold Gown" data-price="599">
                 <div class="product-image">
-                    <div class="product-badge">NEW</div>
-                    <span>Midnight Satin Gown</span>
+                    <div class="product-badge">Crown Jewel</div>
+                    <span>Imperial Gold Gown</span>
                     <button class="product-quick-view add-to-cart">Add to Cart</button>
                 </div>
                 <div class="product-info">
-                    <div class="product-category">Evening Gown</div>
-                    <h3 class="product-name">Midnight Satin Gown</h3>
-                    <p class="product-description">Luxurious floor-length gown with elegant draping</p>
+                    <div class="product-category">Sovereign Collection</div>
+                    <h3 class="product-name">Imperial Gold Gown</h3>
+                    <p class="product-description">Lavish gold brocade with hand-sewn crystal embroidery</p>
                     <div class="product-price">
-                        <span class="current-price">$299</span>
+                        <span class="current-price">$599</span>
                     </div>
                     <div class="product-colors">
-                        <div class="color-dot" style="background-color: #1a1a2e;"></div>
-                        <div class="color-dot" style="background-color: #6b5b73;"></div>
-                        <div class="color-dot" style="background-color: #8b0000;"></div>
+                        <div class="color-dot" style="background-color: #FFD700;"></div>
+                        <div class="color-dot" style="background-color: #B8860B;"></div>
+                        <div class="color-dot" style="background-color: #DAA520;"></div>
                     </div>
                     <div class="product-rating">
                         <span class="stars">★★★★★</span>
-                        <span>(48 reviews)</span>
+                        <span>(64 reviews)</span>
                     </div>
                 </div>
             </div>
 
             <!-- Product 2 -->
-            <div class="product-card" data-price="349">
+            <div class="product-card" data-id="rh002" data-name="Queen's Velvet Majesty" data-price="549">
                 <div class="product-image">
-                    <div class="product-badge">BESTSELLER</div>
-                    <span>Royal Velvet Dress</span>
+                    <div class="product-badge">Royal Favorite</div>
+                    <span>Queen's Velvet Majesty</span>
                     <button class="product-quick-view add-to-cart">Add to Cart</button>
                 </div>
                 <div class="product-info">
-                    <div class="product-category">Cocktail Dress</div>
-                    <h3 class="product-name">Royal Velvet Dress</h3>
-                    <p class="product-description">Plush velvet dress with sophisticated silhouette</p>
+                    <div class="product-category">Sovereign Collection</div>
+                    <h3 class="product-name">Queen's Velvet Majesty</h3>
+                    <p class="product-description">Deep crimson velvet with golden embellishments</p>
                     <div class="product-price">
-                        <span class="current-price">$349</span>
+                        <span class="current-price">$549</span>
                     </div>
                     <div class="product-colors">
-                        <div class="color-dot" style="background-color: #4a3f4f;"></div>
+                        <div class="color-dot" style="background-color: #8B0000;"></div>
                         <div class="color-dot" style="background-color: #800020;"></div>
-                        <div class="color-dot" style="background-color: #004d00;"></div>
+                        <div class="color-dot" style="background-color: #4B0082;"></div>
                     </div>
                     <div class="product-rating">
                         <span class="stars">★★★★★</span>
-                        <span>(92 reviews)</span>
+                        <span>(112 reviews)</span>
                     </div>
                 </div>
             </div>
 
             <!-- Product 3 -->
-            <div class="product-card" data-price="279">
+            <div class="product-card" data-id="rh003" data-name="Sapphire Coronation" data-price="479">
                 <div class="product-image">
-                    <div class="product-badge sale">SALE</div>
-                    <span>Starlight Sequin Gown</span>
+                    <div class="product-badge sale">Limited Edition</div>
+                    <span>Sapphire Coronation</span>
                     <button class="product-quick-view add-to-cart">Add to Cart</button>
                 </div>
                 <div class="product-info">
-                    <div class="product-category">Evening Gown</div>
-                    <h3 class="product-name">Starlight Sequin Gown</h3>
-                    <p class="product-description">Shimmering sequins with flattering A-line cut</p>
+                    <div class="product-category">Crown Collection</div>
+                    <h3 class="product-name">Sapphire Coronation</h3>
+                    <p class="product-description">Midnight blue silk adorned with sapphire crystals</p>
                     <div class="product-price">
-                        <span class="current-price">$279</span>
-                        <span class="original-price">$399</span>
+                        <span class="current-price">$479</span>
+                        <span class="original-price">$649</span>
                     </div>
                     <div class="product-colors">
-                        <div class="color-dot" style="background-color: #C0C0C0;"></div>
-                        <div class="color-dot" style="background-color: #FFD700;"></div>
-                        <div class="color-dot" style="background-color: #E0115F;"></div>
+                        <div class="color-dot" style="background-color: #000080;"></div>
+                        <div class="color-dot" style="background-color: #0F52BA;"></div>
+                        <div class="color-dot" style="background-color: #191970;"></div>
                     </div>
                     <div class="product-rating">
-                        <span class="stars">★★★★☆</span>
-                        <span>(67 reviews)</span>
+                        <span class="stars">★★★★★</span>
+                        <span>(87 reviews)</span>
                     </div>
                 </div>
             </div>
 
             <!-- Product 4 -->
-            <div class="product-card" data-price="425">
+            <div class="product-card" data-id="rh004" data-name="Emerald Empress" data-price="675">
                 <div class="product-image">
-                    <div class="product-badge">EXCLUSIVE</div>
-                    <span>Empress Silk Gown</span>
+                    <div class="product-badge">Exclusive</div>
+                    <span>Emerald Empress</span>
                     <button class="product-quick-view add-to-cart">Add to Cart</button>
                 </div>
                 <div class="product-info">
-                    <div class="product-category">Evening Gown</div>
-                    <h3 class="product-name">Empress Silk Gown</h3>
-                    <p class="product-description">Pure silk with hand-embroidered details</p>
+                    <div class="product-category">Sovereign Collection</div>
+                    <h3 class="product-name">Emerald Empress</h3>
+                    <p class="product-description">Rich emerald satin with pearl detailing</p>
                     <div class="product-price">
-                        <span class="current-price">$425</span>
+                        <span class="current-price">$675</span>
                     </div>
                     <div class="product-colors">
-                        <div class="color-dot" style="background-color: #4a3f4f;"></div>
-                        <div class="color-dot" style="background-color: #800000;"></div>
+                        <div class="color-dot" style="background-color: #046307;"></div>
+                        <div class="color-dot" style="background-color: #50C878;"></div>
                     </div>
                     <div class="product-rating">
                         <span class="stars">★★★★★</span>
-                        <span>(125 reviews)</span>
+                        <span>(143 reviews)</span>
                     </div>
                 </div>
             </div>
 
             <!-- Product 5 -->
-            <div class="product-card" data-price="315">
+            <div class="product-card" data-id="rh005" data-name="Royal Ivory Regalia" data-price="525">
                 <div class="product-image">
-                    <span>Luna Lace Dress</span>
+                    <span>Royal Ivory Regalia</span>
                     <button class="product-quick-view add-to-cart">Add to Cart</button>
                 </div>
                 <div class="product-info">
-                    <div class="product-category">Cocktail Dress</div>
-                    <h3 class="product-name">Luna Lace Dress</h3>
-                    <p class="product-description">Delicate lace overlay with vintage charm</p>
+                    <div class="product-category">Heritage Collection</div>
+                    <h3 class="product-name">Royal Ivory Regalia</h3>
+                    <p class="product-description">Vintage ivory lace with golden thread work</p>
                     <div class="product-price">
-                        <span class="current-price">$315</span>
+                        <span class="current-price">$525</span>
                     </div>
                     <div class="product-colors">
-                        <div class="color-dot" style="background-color: #1a1a2e;"></div>
-                        <div class="color-dot" style="background-color: #f5f5dc;"></div>
-                        <div class="color-dot" style="background-color: #5d3a3a;"></div>
+                        <div class="color-dot" style="background-color: #FFFFF0;"></div>
+                        <div class="color-dot" style="background-color: #F5F5DC;"></div>
+                        <div class="color-dot" style="background-color: #FFE4C4;"></div>
                     </div>
                     <div class="product-rating">
                         <span class="stars">★★★★★</span>
-                        <span>(73 reviews)</span>
+                        <span>(95 reviews)</span>
                     </div>
                 </div>
             </div>
 
             <!-- Product 6 -->
-            <div class="product-card" data-price="389">
+            <div class="product-card" data-id="rh006" data-name="Duchess Brocade" data-price="589">
                 <div class="product-image">
-                    <div class="product-badge">NEW</div>
-                    <span>Diamond Draped Gown</span>
+                    <div class="product-badge">Crown Jewel</div>
+                    <span>Duchess Brocade</span>
                     <button class="product-quick-view add-to-cart">Add to Cart</button>
                 </div>
                 <div class="product-info">
-                    <div class="product-category">Evening Gown</div>
-                    <h3 class="product-name">Diamond Draped Gown</h3>
-                    <p class="product-description">Asymmetric draping with crystal accents</p>
+                    <div class="product-category">Sovereign Collection</div>
+                    <h3 class="product-name">Duchess Brocade</h3>
+                    <p class="product-description">Ornate gold brocade with baroque patterns</p>
                     <div class="product-price">
-                        <span class="current-price">$389</span>
+                        <span class="current-price">$589</span>
                     </div>
                     <div class="product-colors">
-                        <div class="color-dot" style="background-color: #000000;"></div>
-                        <div class="color-dot" style="background-color: #4a3f4f;"></div>
-                        <div class="color-dot" style="background-color: #696969;"></div>
+                        <div class="color-dot" style="background-color: #B8860B;"></div>
+                        <div class="color-dot" style="background-color: #FFD700;"></div>
+                        <div class="color-dot" style="background-color: #DAA520;"></div>
                     </div>
                     <div class="product-rating">
                         <span class="stars">★★★★★</span>
-                        <span>(56 reviews)</span>
+                        <span>(78 reviews)</span>
                     </div>
                 </div>
             </div>
 
             <!-- Product 7 -->
-            <div class="product-card" data-price="269">
+            <div class="product-card" data-id="rh007" data-name="Platinum Dynasty" data-price="429">
                 <div class="product-image">
-                    <div class="product-badge sale">SALE</div>
-                    <span>Rose Gold Midi Dress</span>
+                    <div class="product-badge sale">Limited Edition</div>
+                    <span>Platinum Dynasty</span>
                     <button class="product-quick-view add-to-cart">Add to Cart</button>
-
                 </div>
                 <div class="product-info">
-                    <div class="product-category">Cocktail Dress</div>
-                    <h3 class="product-name">Rose Gold Midi Dress</h3>
-                    <p class="product-description">Metallic finish with contemporary midi length</p>
+                    <div class="product-category">Heritage Collection</div>
+                    <h3 class="product-name">Platinum Dynasty</h3>
+                    <p class="product-description">Metallic silver with diamond-inspired accents</p>
                     <div class="product-price">
-                        <span class="current-price">$269</span>
-                        <span class="original-price">$349</span>
+                        <span class="current-price">$429</span>
+                        <span class="original-price">$559</span>
                     </div>
                     <div class="product-colors">
-                        <div class="color-dot" style="background-color: #B76E79;"></div>
-                        <div class="color-dot" style="background-color: #FFD700;"></div>
                         <div class="color-dot" style="background-color: #C0C0C0;"></div>
+                        <div class="color-dot" style="background-color: #E5E4E2;"></div>
+                        <div class="color-dot" style="background-color: #BCC6CC;"></div>
                     </div>
                     <div class="product-rating">
                         <span class="stars">★★★★☆</span>
-                        <span>(41 reviews)</span>
+                        <span>(62 reviews)</span>
                     </div>
                 </div>
             </div>
 
             <!-- Product 8 -->
-            <div class="product-card" data-price="459">
+            <div class="product-card" data-id="rh008" data-name="Ruby Coronation Crown" data-price="749">
                 <div class="product-image">
-                    <div class="product-badge">EXCLUSIVE</div>
-                    <span>Celestial Beaded Gown</span>
+                    <div class="product-badge">Exclusive</div>
+                    <span>Ruby Coronation Crown</span>
                     <button class="product-quick-view add-to-cart">Add to Cart</button>
                 </div>
                 <div class="product-info">
-                    <div class="product-category">Evening Gown</div>
-                    <h3 class="product-name">Celestial Beaded Gown</h3>
-                    <p class="product-description">Hand-beaded masterpiece with celestial motifs</p>
+                    <div class="product-category">Crown Collection</div>
+                    <h3 class="product-name">Ruby Coronation Crown</h3>
+                    <p class="product-description">Magnificent ruby-toned gown with crown embroidery</p>
                     <div class="product-price">
-                        <span class="current-price">$459</span>
+                        <span class="current-price">$749</span>
                     </div>
                     <div class="product-colors">
-                        <div class="color-dot" style="background-color: #1a1a2e;"></div>
-                        <div class="color-dot" style="background-color: #000080;"></div>
-                    </div>
-                    <div class="product-rating">
-                        <span class="stars">★★★★★</span>
-                        <span>(89 reviews)</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>Customer Care</h3>
-                <p><a href="#">Contact Us</a></p>
-                <p><a href="#">Shipping Info</a></p>
-                <p><a href="#">Returns</a></p>
-                <p><a href="#">Size Guide</a></p>
-            </div>
-            <div class="footer-section">
-                <h3>About Veloria</h3>
-                <p><a href="#">Our Story</a></p>
-                <p><a href="#">Sustainability</a></p>
-                <p><a href="#">Careers</a></p>
-            </div>
-            <div class="footer-section">
-                <h3>Stay Connected</h3>
-                <p>Subscribe to our newsletter for exclusive offers</p>
-                <p style="margin-top: 1rem;">📧 newsletter@veloria.com</p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>© 2024 Veloria. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <script>
-        //<script>
-
-function getCart() {
-    return JSON.parse(localStorage.getItem("cart")) || [];
-}
-
-function saveCart(cart) {
-    localStorage.setItem("cart", JSON.stringify(cart));
-}
-
-function addToCart(product) {
-    let cart = getCart();
-
-    const existing = cart.find(item => item.id === product.id);
-    if (existing) {
-        existing.qty += 1;
-    } else {
-        cart.push({ ...product, qty: 1 });
-    }
-
-    saveCart(cart);
-    alert(`${product.name} added to cart 🛍️`);
-}
-
-
-document.querySelectorAll(".add-to-cart").forEach(button => {
-    button.addEventListener("click", (e) => {
-        e.stopPropagation();
-
-        const card = button.closest(".product-card");
-
-        const product = {
-            id: card.dataset.id,
-            name: card.dataset.name,
-            price: parseInt(card.dataset.price)
-        };
-
-        addToCart(product);
-    });
-});
-
-
-const sortFilter = document.getElementById("sortFilter");
-const productsGrid = document.querySelector(".products-grid");
-
-sortFilter.addEventListener("change", (e) => {
-    const products = Array.from(document.querySelectorAll(".product-card"));
-    const value = e.target.value;
-
-    if (value === "price-low") {
-        products.sort((a, b) => a.dataset.price - b.dataset.price);
-    } else if (value === "price-high") {
-        products.sort((a, b) => b.dataset.price - a.dataset.price);
-    }
-
-    products.forEach(p => productsGrid.appendChild(p));
-});
-
-
-    </script>
-</body>
-</html>
+                        <div class="color-dot"
