@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Veloria</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: #faf8f5;
+            color: #2d2d2d;
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            background: linear-gradient(to right, #ffffff, #fefdfb);
+            box-shadow: 0 2px 8px rgba(184, 134, 11, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(184, 134, 11, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.25rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.75rem;
+            background: linear-gradient(135deg, #d4af37, #b8860b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #5a5a5a;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, #d4af37, #b8860b);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #b8860b;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            margin-bottom: 5rem;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '✉';
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2rem;
+            opacity: 0.3;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            background: linear-gradient(135deg, #b8860b, #d4af37, #f4e4c1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            font-weight: normal;
+            letter-spacing: 2px;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: #6b6b6b;
+        }
+
+        .divider {
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(to right, transparent, #d4af37, transparent);
+            margin: 2.5rem auto;
+            position: relative;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '◆';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #d4af37;
+            font-size: 0.5rem;
+        }
+
+        .divider::before {
+            left: -15px;
+        }
+
+        .divider::after {
+            right: -15px;
+        }
+
+        /* Contact Grid */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 5rem;
+        }
+
+        /* Contact Form */
+        .form-section {
+            background: linear-gradient(to bottom, #ffffff, #fefdfb);
+            padding: 3rem;
+            border-radius: 1rem;
+            box-shadow: 0 8px 24px rgba(184, 134, 11, 0.08);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .form-section h2 {
+            font-size: 2rem;
+            background: linear-gradient(135deg, #b8860b, #d4af37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2rem;
+            font-weight: normal;
+        }
+
+        .form-group {
+            margin-bottom: 1.75rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: #5a5a5a;
+            margin-bottom: 0.75rem;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem 1.25rem;
+            border: 2px solid rgba(212, 175, 55, 0.2);
+            border-radius: 0.5rem;
+            font-family: 'Georgia', serif;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background: #fefdfb;
+            color: #2d2d2d;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #d4af37;
+            box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.1);
+            background: white;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 140px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #d4af37, #b8860b);
+            color: white;
+            padding: 1rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1.05rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            box-shadow: 0 4px 12px rgba(184, 134, 11, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(184, 134, 11, 0.4);
+        }
+
+        .success-message {
+            background: linear-gradient(135deg, #d4f4dd, #c3f0cf);
+            border: 2px solid #86d7a0;
+            padding: 2rem;
+            border-radius: 1rem;
+            text-align: center;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        .success-message .icon {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .success-message p {
+            color: #1e5631;
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+
+        .success-message p.small {
+            font-size: 0.95rem;
+            color: #2d7a45;
+            margin-top: 0.5rem;
+        }
+
+        /* Info Section */
+        .info-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1.75rem;
+        }
+
+        .info-card {
+            background: linear-gradient(to bottom, #ffffff, #fefdfb);
+            padding: 2.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 8px 24px rgba(184, 134, 11, 0.08);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .info-card h2 {
+            font-size: 1.75rem;
+            background: linear-gradient(135deg, #b8860b, #d4af37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2rem;
+            font-weight: normal;
+        }
+
+        .info-item {
+            display: flex;
+            gap: 1.25rem;
+            margin-bottom: 2rem;
+            align-items: flex-start;
+        }
+
+        .info-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-icon {
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, #f4e4c1, #e8d7b5);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 12px rgba(184, 134, 11, 0.15);
+        }
+
+        .info-content h3 {
+            color: #2d2d2d;
+            font-size: 1.05rem;
+            margin-bottom: 0.5rem;
+            font-weight: normal;
+        }
+
+        .info-content p {
+            color: #6b6b6b;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .social-card {
+            background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%);
+            padding: 2.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 8px 24px rgba(184, 134, 11, 0.25);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+        }
+
+        .social-card h2 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            position: relative;
+            font-weight: normal;
+        }
+
+        .social-card p {
+            margin-bottom: 1.75rem;
+            opacity: 0.95;
+            position: relative;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            position: relative;
+        }
+
+        .social-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            cursor: pointer;
+            font-size: 1.3rem;
+        }
+
+        .social-icon:hover {
+            background: rgba(255, 255, 255, 0.35);
+            transform: translateY(-4px);
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            background: linear-gradient(to bottom, #ffffff, #fefdfb);
+            padding: 3rem;
+            border-radius: 1rem;
+            box-shadow: 0 8px 24px rgba(184, 134, 11, 0.08);
+            margin-bottom: 5rem;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .faq-section h2 {
+            font-size: 2rem;
+            background: linear-gradient(135deg, #b8860b, #d4af37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+            margin-bottom: 3rem;
+            font-weight: normal;
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2.5rem;
+        }
+
+        .faq-item {
+            padding: 1.5rem;
+            background: #faf8f5;
+            border-radius: 0.75rem;
+            border-left: 3px solid #d4af37;
+        }
+
+        .faq-item h3 {
+            color: #2d2d2d;
+            font-size: 1.05rem;
+            margin-bottom: 0.75rem;
+            font-weight: normal;
+        }
+
+        .faq-item p {
+            color: #6b6b6b;
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
+            color: #e8d7b5;
+            padding: 4rem 2rem 2rem;
+            margin-top: 5rem;
+            border-top: 3px solid #d4af37;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: #d4af37;
+            font-weight: normal;
+        }
+
+        .footer-section p {
+            font-size: 0.9rem;
+            font-style: italic;
+            color: #c9b999;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-section a {
+            color: #c9b999;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #d4af37;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            padding-top: 2rem;
+            text-align: center;
+        }
+
+        .footer-bottom p {
+            font-size: 0.8rem;
+            color: #a89968;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .contact-grid,
+            .faq-grid,
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.85rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .container {
+                padding: 3rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Veloria</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero">
+            <h1>Get In Touch</h1>
+            <p>We'd love to hear from you</p>
+            <div class="divider"></div>
+        </div>
+
+        <!-- Contact Grid -->
+        <div class="contact-grid">
+            <!-- Contact Form -->
+            <div class="form-section">
+                <h2>Send us a Message</h2>
+                <div id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Name *</label>
+                        <input type="text" id="name" placeholder="Your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" placeholder="your.email@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject *</label>
+                        <input type="text" id="subject" placeholder="What's this about?" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message *</label>
+                        <textarea id="message" placeholder="Tell us what's on your mind..." required></textarea>
+                    </div>
+                    <button class="submit-btn" onclick="submitForm()">
+                        <span>✉</span>
+                        Send Message
+                    </button>
+                </div>
+                <div id="successMessage" class="success-message">
+                    <div class="icon">✓</div>
+                    <p>Thank you for reaching out!</p>
+                    <p class="small">We'll get back to you soon.</p>
+                </div>
+            </div>
+
+            <!-- Info Section -->
+            <div class="info-section">
+                <div class="info-card">
+                    <h2>Contact Information</h2>
+                    <div class="info-item">
+                        <div class="info-icon">✉</div>
+                        <div class="info-content">
+                            <h3>Email</h3>
+                            <p>hello@veloria.com</p>
+                            <p>support@veloria.com</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">📞</div>
+                        <div class="info-content">
+                            <h3>Phone</h3>
+                            <p>+1 (555) 123-4567</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">🕐</div>
+                        <div class="info-content">
+                            <h3>Business Hours</h3>
+                            <p>Monday - Friday: 9AM - 6PM EST</p>
+                            <p>Saturday: 10AM - 4PM EST</p>
+                            <p>Sunday: Closed</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">📍</div>
+                        <div class="info-content">
+                            <h3>Address</h3>
+                            <p>123 Fashion Avenue</p>
+                            <p>New York, NY 10001</p>
+                            <p>United States</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="social-card">
+                    <h2>Follow Us</h2>
+                    <p>Stay connected for the latest collections and style inspiration</p>
+                    <div class="social-icons">
+                        <div class="social-icon">📷</div>
+                        <div class="social-icon">👥</div>
+                        <div class="social-icon">🐦</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ Section -->
+        <div class="faq-section">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h3>What are your shipping options?</h3>
+                    <p>We offer standard and express shipping options. Standard shipping takes 5-7 business days, while express shipping delivers in 2-3 business days.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>What is your return policy?</h3>
+                    <p>We accept returns within 30 days of purchase for unworn items with original tags attached. Full refund or exchange available.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Do you offer international shipping?</h3>
+                    <p>Yes! We ship to most countries worldwide. International shipping times vary by location, typically 10-15 business days.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>How can I track my order?</h3>
+                    <p>Once your order ships, you'll receive a tracking number via email. You can use this to monitor your delivery status.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Veloria</h3>
+                <p>Timeless. Feminine. You.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Shop</h3>
+                <ul>
+                    <li><a href="#">New Arrivals</a></li>
+                    <li><a href="#">Collections</a></li>
+                    <li><a href="#">Sale</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>About</h3>
+                <ul>
+                    <li><a href="#">Our Story</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <div class="social-icon">📷</div>
+                    <div class="social-icon">👥</div>
+                    <div class="social-icon">🐦</div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Veloria. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function submitForm() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+
+            if (name && email && subject && message) {
+                document.getElementById('contactForm').style.display = 'none';
+                document.getElementById('successMessage').classList.add('show');
+
+                setTimeout(() => {
+                    document.getElementById('contactForm').style.display = 'block';
+                    document.getElementById('successMessage').classList.remove('show');
+                    document.getElementById('name').value = '';
+                    document.getElementById('email').value = '';
+                    document.getElementById('subject').value = '';
+                    document.getElementById('message').value = '';
+                }, 3000);
+            } else {
+                alert('Please fill in all required fields.');
+            }
+        }
+    </script>
+</body>
+</html>

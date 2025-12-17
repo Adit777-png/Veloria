@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collections - Veloria</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', 'Georgia', serif;
+            background-color: #f8f6f4;
+            color: #4a3f4f;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            background-color: #4a3f4f;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo img {
+            height: 50px;
+            width: auto;
+        }
+
+        .logo-text {
+            font-size: 2rem;
+            color: #e8dcc7;
+            letter-spacing: 2px;
+            font-weight: 300;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #e8dcc7;
+            text-decoration: none;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #d4af37;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #d4af37;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-icons button {
+            background: none;
+            border: none;
+            color: #e8dcc7;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .nav-icons button:hover,
+        .nav-icons a:hover {
+            color: #d4af37;
+        }
+
+        .nav-icons a {
+            color: #e8dcc7;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+            text-decoration: none;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, #4a3f4f 0%, #6b5b73 100%);
+            padding: 5rem 5%;
+            text-align: center;
+            color: #e8dcc7;
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            font-weight: 300;
+            letter-spacing: 4px;
+            margin-bottom: 1rem;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            color: #d4af37;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Filter Section */
+        .filter-section {
+            padding: 3rem 5%;
+            background-color: white;
+            border-bottom: 1px solid #e8dcc7;
+        }
+
+        .filter-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .filter-title {
+            font-size: 1.3rem;
+            letter-spacing: 2px;
+            color: #4a3f4f;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.7rem 2rem;
+            background-color: transparent;
+            border: 2px solid #4a3f4f;
+            color: #4a3f4f;
+            cursor: pointer;
+            transition: all 0.3s;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            font-family: 'Cormorant Garamond', 'Georgia', serif;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .filter-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background-color: #4a3f4f;
+            transform: translate(-50%, -50%);
+            transition: width 0.5s, height 0.5s;
+            z-index: -1;
+        }
+
+        .filter-btn:hover::before,
+        .filter-btn.active::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            color: #e8dcc7;
+        }
+
+        /* Collections Grid */
+        .collections-section {
+            padding: 4rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .collections-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 3rem;
+        }
+
+        .collection-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            opacity: 0;
+            animation: fadeInScale 0.6s ease-out forwards;
+        }
+
+        .collection-card:nth-child(1) { animation-delay: 0.1s; }
+        .collection-card:nth-child(2) { animation-delay: 0.2s; }
+        .collection-card:nth-child(3) { animation-delay: 0.3s; }
+        .collection-card:nth-child(4) { animation-delay: 0.4s; }
+        .collection-card:nth-child(5) { animation-delay: 0.5s; }
+        .collection-card:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.8) translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .collection-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .collection-image {
+            height: 450px;
+            background: linear-gradient(135deg, #6b5b73, #8b7b8f);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .collection-image::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(232, 220, 199, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .collection-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(74, 63, 79, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .collection-card:hover .collection-overlay {
+            opacity: 1;
+        }
+
+        .collection-overlay h3 {
+            color: #e8dcc7;
+            font-size: 2rem;
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+        }
+
+        .collection-overlay p {
+            color: #d4af37;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+        }
+
+        .collection-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #d4af37;
+            color: #4a3f4f;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            font-weight: bold;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 10px rgba(212, 175, 55, 0);
+            }
+        }
+
+        .collection-info {
+            padding: 2rem;
+        }
+
+        .collection-category {
+            color: #d4af37;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .collection-name {
+            font-size: 2rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            color: #4a3f4f;
+            transition: all 0.3s;
+        }
+
+        .collection-card:hover .collection-name {
+            color: #d4af37;
+            letter-spacing: 3px;
+        }
+
+        .collection-description {
+            color: #6b5b73;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+        }
+
+        .collection-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid #e8dcc7;
+        }
+
+        .item-count {
+            color: #4a3f4f;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+        }
+
+        .explore-btn {
+            color: #4a3f4f;
+            text-decoration: none;
+            letter-spacing: 2px;
+            border-bottom: 2px solid #4a3f4f;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            padding-bottom: 2px;
+            display: inline-block;
+            position: relative;
+        }
+
+        .explore-btn::after {
+            content: '→';
+            position: absolute;
+            right: -20px;
+            opacity: 0;
+            transition: all 0.3s;
+        }
+
+        .explore-btn:hover {
+            color: #d4af37;
+            border-color: #d4af37;
+            padding-right: 25px;
+        }
+
+        .explore-btn:hover::after {
+            opacity: 1;
+            right: 0;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #4a3f4f;
+            color: #e8dcc7;
+            padding: 3rem 5%;
+            text-align: center;
+            margin-top: 5rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.3rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section p, .footer-section a {
+            color: #e8dcc7;
+            text-decoration: none;
+            line-height: 2;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #d4af37;
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(232, 220, 199, 0.2);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .collections-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">
+            <img src="logo.png" alt="Veloria Logo">
+            <span class="logo-text">VELORIA</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="#new">New Arrivals</a></li>
+            <li><a href="collections.html">Collections</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="nav-icons">
+            <button id="searchBtn">🔍</button>
+            <a href="#account">👤</a>
+            <a href="#cart">🛒</a>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1>OUR COLLECTIONS</h1>
+        <p>Discover Timeless Elegance</p>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="filter-section">
+        <div class="filter-container">
+            <div class="filter-title">Filter By:</div>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All Collections</button>
+                <button class="filter-btn" data-filter="evening">Evening Wear</button>
+                <button class="filter-btn" data-filter="casual">Casual</button>
+                <button class="filter-btn" data-filter="formal">Formal</button>
+                <button class="filter-btn" data-filter="seasonal">Seasonal</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Collections Grid -->
+    <section class="collections-section">
+        <div class="collections-grid" id="collectionsGrid">
+            <!-- Evening Elegance -->
+            <div class="collection-card" data-category="evening">
+                <div class="collection-image">
+                    <div class="collection-badge">NEW</div>
+                    <div class="collection-overlay">
+                        <h3>EVENING ELEGANCE</h3>
+                        <p>View Collection →</p>
+                    </div>
+                </div>
+                <div class="collection-info">
+                    <div class="collection-category">Evening Wear</div>
+                    <h2 class="collection-name">Evening Elegance</h2>
+                    <p class="collection-description">Sophisticated pieces designed for unforgettable nights. Each dress tells a story of grace and refined beauty.</p>
+                    <div class="collection-meta">
+                        <span class="item-count">24 Items</span>
+                        <a href="eveningelegance.html" class="explore-btn">Explore →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Everyday Luxury -->
+            <div class="collection-card" data-category="casual">
+                <div class="collection-image">
+                    <div class="collection-overlay">
+                        <h3>EVERYDAY LUXURY</h3>
+                        <p>View Collection →</p>
+                    </div>
+                </div>
+                <div class="collection-info">
+                    <div class="collection-category">Casual Wear</div>
+                    <h2 class="collection-name">Everyday Luxury</h2>
+                    <p class="collection-description">Effortless style for your daily elegance. Comfort meets sophistication in every piece.</p>
+                    <div class="collection-meta">
+                        <span class="item-count">32 Items</span>
+                        <a href="everydayluxury.html" class="explore-btn">Explore →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Royal Heritage -->
+            <div class="collection-card" data-category="formal">
+                <div class="collection-image">
+                    <div class="collection-badge">EXCLUSIVE</div>
+                    <div class="collection-overlay">
+                        <h3>ROYAL HERITAGE</h3>
+                        <p>View Collection →</p>
+                    </div>
+                </div>
+                <div class="collection-info">
+                    <div class="collection-category">Formal Wear</div>
+                    <h2 class="collection-name">Royal Heritage</h2>
+                    <p class="collection-description">Timeless designs inspired by royalty. Experience the grandeur of centuries-old elegance.</p>
+                    <div class="collection-meta">
+                        <span class="item-count">18 Items</span>
+                        <a href="#" class="explore-btn">Explore →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Summer Breeze -->
+            <div class="collection-card" data-category="seasonal">
+                <div class="collection-image">
+                    <div class="collection-badge">TRENDING</div>
+                    <div class="collection-overlay">
+                        <h3>SUMMER BREEZE</h3>
+                        <p>View Collection →</p>
+                    </div>
+                </div>
+                <div class="collection-info">
+                    <div class="collection-category">Seasonal</div>
+                    <h2 class="collection-name">Summer Breeze</h2>
+                    <p class="collection-description">Light, airy pieces perfect for warm days. Embrace the season with flowing fabrics and vibrant designs.</p>
+                    <div class="collection-meta">
+                        <span class="item-count">28 Items</span>
+                        <a href="#" class="explore-btn">Explore →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Winter Wonderland -->
+            <div class="collection-card" data-category="seasonal">
+                <div class="collection-image">
+                    <div class="collection-overlay">
+                        <h3>WINTER WONDERLAND</h3>
+                        <p>View Collection →</p>
+                    </div>
+                </div>
+                <div class="collection-info">
+                    <div class="collection-category">Seasonal</div>
+                    <h2 class="collection-name">Winter Wonderland</h2>
+                    <p class="collection-description">Cozy elegance for the colder months. Stay warm while looking stunning in our winter collection.</p>
+                    <div class="collection-meta">
+                        <span class="item-count">22 Items</span>
+                        <a href="#" class="explore-btn">Explore →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Business Chic -->
+            <div class="collection-card" data-category="formal">
+                <div class="collection-image">
+                    <div class="collection-overlay">
+                        <h3>BUSINESS CHIC</h3>
+                        <p>View Collection →</p>
+                    </div>
+                </div>
+                <div class="collection-info">
+                    <div class="collection-category">Formal Wear</div>
+                    <h2 class="collection-name">Business Chic</h2>
+                    <p class="collection-description">Power dressing redefined. Professional attire that commands respect and exudes confidence.</p>
+                    <div class="collection-meta">
+                        <span class="item-count">26 Items</span>
+                        <a href="#" class="explore-btn">Explore →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Customer Care</h3>
+                <p><a href="#">Contact Us</a></p>
+                <p><a href="#">Shipping Info</a></p>
+                <p><a href="#">Returns</a></p>
+                <p><a href="#">Size Guide</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>About Veloria</h3>
+                <p><a href="#">Our Story</a></p>
+                <p><a href="#">Sustainability</a></p>
+                <p><a href="#">Careers</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>Stay Connected</h3>
+                <p>Subscribe to our newsletter for exclusive offers</p>
+                <p style="margin-top: 1rem;">📧 newsletter@veloria.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Veloria. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Filter functionality
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const collectionCards = document.querySelectorAll('.collection-card');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                button.classList.add('active');
+
+                const filterValue = button.getAttribute('data-filter');
+
+                collectionCards.forEach(card => {
+                    if (filterValue === 'all') {
+                        card.style.display = 'block';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'scale(1)';
+                        }, 10);
+                    } else {
+                        const category = card.getAttribute('data-category');
+                        if (category === filterValue) {
+                            card.style.display = 'block';
+                            setTimeout(() => {
+                                card.style.opacity = '1';
+                                card.style.transform = 'scale(1)';
+                            }, 10);
+                        } else {
+                            card.style.opacity = '0';
+                            card.style.transform = 'scale(0.8)';
+                            setTimeout(() => {
+                                card.style.display = 'none';
+                            }, 300);
+                        }
+                    }
+                });
+            });
+        });
+
+        // Add transition styles
+        collectionCards.forEach(card => {
+            card.style.transition = 'opacity 0.3s, transform 0.3s';
+        });
+    </script>
+</body>
+</html>

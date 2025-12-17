@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Veloria</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: #faf8f5;
+            color: #2d2d2d;
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            background: linear-gradient(to right, #ffffff, #fefdfb);
+            box-shadow: 0 2px 8px rgba(184, 134, 11, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(184, 134, 11, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.25rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.75rem;
+            background: linear-gradient(135deg, #d4af37, #b8860b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #5a5a5a;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, #d4af37, #b8860b);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #b8860b;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            margin-bottom: 5rem;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '✨';
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2rem;
+            opacity: 0.3;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            background: linear-gradient(135deg, #b8860b, #d4af37, #f4e4c1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            font-weight: normal;
+            letter-spacing: 2px;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            color: #8b7355;
+            font-style: italic;
+            letter-spacing: 3px;
+        }
+
+        .divider {
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(to right, transparent, #d4af37, transparent);
+            margin: 2.5rem auto;
+            position: relative;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '◆';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #d4af37;
+            font-size: 0.5rem;
+        }
+
+        .divider::before {
+            left: -15px;
+        }
+
+        .divider::after {
+            right: -15px;
+        }
+
+        /* Story Section */
+        .story-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 5rem;
+            align-items: center;
+        }
+
+        .story-text h2 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #b8860b, #d4af37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2rem;
+            font-weight: normal;
+        }
+
+        .story-text p {
+            color: #5a5a5a;
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .story-image {
+            background: linear-gradient(135deg, #f4e4c1 0%, #e8d7b5 100%);
+            border-radius: 1rem;
+            padding: 4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(184, 134, 11, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-image::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+            animation: shimmer 8s infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(180deg); }
+        }
+
+        .story-image-content {
+            color: #8b7355;
+            position: relative;
+            z-index: 1;
+        }
+
+        .story-image .icon {
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 4px 6px rgba(184, 134, 11, 0.3));
+        }
+
+        .story-image p {
+            font-size: 1.2rem;
+            font-style: italic;
+        }
+
+        /* Values Section */
+        .values-section {
+            margin-bottom: 5rem;
+        }
+
+        .values-section h2 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #b8860b, #d4af37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+            margin-bottom: 4rem;
+            font-weight: normal;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+        }
+
+        .value-card {
+            background: linear-gradient(to bottom, #ffffff, #fefdfb);
+            padding: 2.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 8px 24px rgba(184, 134, 11, 0.08);
+            text-align: center;
+            transition: all 0.4s;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .value-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(to right, #d4af37, #b8860b);
+            transform: scaleX(0);
+            transition: transform 0.4s;
+        }
+
+        .value-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 32px rgba(184, 134, 11, 0.15);
+        }
+
+        .value-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .value-card .icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 2px 4px rgba(184, 134, 11, 0.2));
+        }
+
+        .value-card h3 {
+            font-size: 1.4rem;
+            color: #8b7355;
+            margin-bottom: 1rem;
+            font-weight: normal;
+        }
+
+        .value-card p {
+            color: #6b6b6b;
+            font-size: 0.98rem;
+            line-height: 1.7;
+        }
+
+        /* Mission Section */
+        .mission-section {
+            background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%);
+            padding: 4rem 3rem;
+            border-radius: 1rem;
+            text-align: center;
+            color: white;
+            margin-bottom: 5rem;
+            box-shadow: 0 15px 40px rgba(184, 134, 11, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mission-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+        }
+
+        .mission-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+            font-weight: normal;
+            letter-spacing: 1px;
+        }
+
+        .mission-section p {
+            font-size: 1.15rem;
+            max-width: 850px;
+            margin: 0 auto;
+            line-height: 2;
+            position: relative;
+        }
+
+        /* Philosophy Section */
+        .philosophy-section {
+            margin-bottom: 5rem;
+        }
+
+        .philosophy-section h2 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #b8860b, #d4af37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+            margin-bottom: 4rem;
+            font-weight: normal;
+        }
+
+        .philosophy-content {
+            background: linear-gradient(to bottom, #ffffff, #fefdfb);
+            padding: 3rem;
+            border-radius: 1rem;
+            box-shadow: 0 8px 24px rgba(184, 134, 11, 0.08);
+            max-width: 950px;
+            margin: 0 auto;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .philosophy-content p {
+            color: #5a5a5a;
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+            line-height: 1.9;
+        }
+
+        .philosophy-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
+            color: #e8d7b5;
+            padding: 4rem 2rem 2rem;
+            margin-top: 5rem;
+            border-top: 3px solid #d4af37;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: #d4af37;
+            font-weight: normal;
+        }
+
+        .footer-section p {
+            font-size: 0.9rem;
+            font-style: italic;
+            color: #c9b999;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-section a {
+            color: #c9b999;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #d4af37;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-icon {
+            width: 42px;
+            height: 42px;
+            background: rgba(212, 175, 55, 0.15);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .social-icon:hover {
+            background: rgba(212, 175, 55, 0.3);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            padding-top: 2rem;
+            text-align: center;
+        }
+
+        .footer-bottom p {
+            font-size: 0.8rem;
+            color: #a89968;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .story-section,
+            .values-grid,
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.85rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .container {
+                padding: 3rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Veloria</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html" class="active">About Us</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero">
+            <h1>About Veloria</h1>
+            <p>Timeless. Feminine. You.</p>
+            <div class="divider"></div>
+        </div>
+
+        <!-- Story Section -->
+        <div class="story-section">
+            <div class="story-text">
+                <h2>Our Story</h2>
+                <p>
+                    Veloria was born from a passion for celebrating the timeless elegance of femininity. 
+                    We believe every woman deserves to feel confident, beautiful, and authentically herself.
+                </p>
+                <p>
+                    Our journey began with a simple vision: to create clothing that transcends fleeting 
+                    trends and embraces the enduring grace of classic design, while honoring the unique 
+                    spirit of every woman who wears our pieces.
+                </p>
+            </div>
+            <div class="story-image">
+                <div class="story-image-content">
+                    <div class="icon">✨</div>
+                    <p>Crafting elegance since our founding</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Values Section -->
+        <div class="values-section">
+            <h2>Our Values</h2>
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="icon">🌙</div>
+                    <h3>Timeless Design</h3>
+                    <p>We create pieces that remain beautiful through seasons and years, never going out of style.</p>
+                </div>
+                <div class="value-card">
+                    <div class="icon">💎</div>
+                    <h3>Quality Craftsmanship</h3>
+                    <p>Every garment is crafted with meticulous attention to detail and the finest materials.</p>
+                </div>
+                <div class="value-card">
+                    <div class="icon">🌸</div>
+                    <h3>Feminine Elegance</h3>
+                    <p>We celebrate the beauty and strength of femininity in all its diverse expressions.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mission Section -->
+        <div class="mission-section">
+            <h2>Our Mission</h2>
+            <p>
+                To empower women through timeless, elegant fashion that celebrates individuality 
+                and confidence. We are committed to creating clothing that makes you feel as 
+                beautiful as you truly are—today, tomorrow, and always.
+            </p>
+        </div>
+
+        <!-- Philosophy Section -->
+        <div class="philosophy-section">
+            <h2>Our Philosophy</h2>
+            <div class="philosophy-content">
+                <p>
+                    At Veloria, we understand that true style is not about following trends—it's about 
+                    discovering pieces that resonate with your personal essence and stand the test of time.
+                </p>
+                <p>
+                    Each collection is thoughtfully curated to offer versatile pieces that transition 
+                    seamlessly from day to night, from season to season, always making you feel 
+                    effortlessly elegant.
+                </p>
+                <p>
+                    We believe that fashion should empower, not constrain. That's why every Veloria 
+                    piece is designed to celebrate your unique beauty and help you express your 
+                    authentic self with confidence and grace.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Veloria</h3>
+                <p>Timeless. Feminine. You.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Shop</h3>
+                <ul>
+                    <li><a href="#">New Arrivals</a></li>
+                    <li><a href="#">Collections</a></li>
+                    <li><a href="#">Sale</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>About</h3>
+                <ul>
+                    <li><a href="#">Our Story</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <div class="social-icon">📷</div>
+                    <div class="social-icon">👥</div>
+                    <div class="social-icon">🐦</div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Veloria. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

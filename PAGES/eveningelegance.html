@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evening Elegance - Veloria</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', 'Georgia', serif;
+            background-color: #f8f6f4;
+            color: #4a3f4f;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            background-color: #4a3f4f;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo img {
+            height: 50px;
+            width: auto;
+        }
+
+        .logo-text {
+            font-size: 2rem;
+            color: #e8dcc7;
+            letter-spacing: 2px;
+            font-weight: 300;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #e8dcc7;
+            text-decoration: none;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #d4af37;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #d4af37;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-icons button {
+            background: none;
+            border: none;
+            color: #e8dcc7;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .nav-icons button:hover,
+        .nav-icons a:hover {
+            color: #d4af37;
+        }
+
+        .nav-icons a {
+            color: #e8dcc7;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+            text-decoration: none;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            padding: 2rem 5%;
+            font-size: 0.95rem;
+            color: #6b5b73;
+        }
+
+        .breadcrumb a {
+            color: #6b5b73;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .breadcrumb a:hover {
+            color: #d4af37;
+        }
+
+        .breadcrumb span {
+            margin: 0 0.5rem;
+        }
+
+        /* Collection Header */
+        .collection-header {
+            background: linear-gradient(135deg, #4a3f4f 0%, #6b5b73 100%);
+            padding: 4rem 5%;
+            text-align: center;
+            color: #e8dcc7;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .collection-header::before {
+            content: '🌙';
+            position: absolute;
+            font-size: 15rem;
+            opacity: 0.05;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .collection-header h1 {
+            font-size: 3.5rem;
+            font-weight: 300;
+            letter-spacing: 4px;
+            margin-bottom: 1rem;
+            position: relative;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .collection-header p {
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            color: #d4af37;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .product-count {
+            margin-top: 1.5rem;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            opacity: 0.9;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Filter and Sort Section */
+        .controls-section {
+            padding: 2.5rem 5%;
+            background-color: white;
+            border-bottom: 1px solid #e8dcc7;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .filter-label {
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            color: #4a3f4f;
+        }
+
+        .filter-select {
+            padding: 0.7rem 2rem;
+            border: 2px solid #4a3f4f;
+            background-color: transparent;
+            color: #4a3f4f;
+            font-family: 'Cormorant Garamond', 'Georgia', serif;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            letter-spacing: 1px;
+        }
+
+        .filter-select:hover,
+        .filter-select:focus {
+            border-color: #d4af37;
+            outline: none;
+        }
+
+        /* Products Grid */
+        .products-section {
+            padding: 4rem 5%;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .product-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            opacity: 0;
+            animation: fadeInScale 0.6s ease-out forwards;
+        }
+
+        .product-card:nth-child(1) { animation-delay: 0.1s; }
+        .product-card:nth-child(2) { animation-delay: 0.15s; }
+        .product-card:nth-child(3) { animation-delay: 0.2s; }
+        .product-card:nth-child(4) { animation-delay: 0.25s; }
+        .product-card:nth-child(5) { animation-delay: 0.3s; }
+        .product-card:nth-child(6) { animation-delay: 0.35s; }
+        .product-card:nth-child(7) { animation-delay: 0.4s; }
+        .product-card:nth-child(8) { animation-delay: 0.45s; }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .product-image {
+            height: 400px;
+            background: linear-gradient(135deg, #6b5b73, #8b7b8f);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #e8dcc7;
+            font-size: 1rem;
+            letter-spacing: 1px;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: #d4af37;
+            color: #4a3f4f;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            font-weight: bold;
+            z-index: 2;
+        }
+
+        .product-badge.sale {
+            background-color: #c9302c;
+            color: white;
+        }
+
+        .product-quick-view {
+            position: absolute;
+            bottom: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #4a3f4f;
+            color: #e8dcc7;
+            padding: 0.8rem 2rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            font-family: 'Cormorant Garamond', 'Georgia', serif;
+            z-index: 3;
+        }
+
+        .product-card:hover .product-quick-view {
+            bottom: 20px;
+        }
+
+        .product-quick-view:hover {
+            background-color: #d4af37;
+            color: #4a3f4f;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-category {
+            color: #d4af37;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-name {
+            font-size: 1.5rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+            margin-bottom: 0.8rem;
+            color: #4a3f4f;
+            transition: color 0.3s;
+        }
+
+        .product-card:hover .product-name {
+            color: #d4af37;
+        }
+
+        .product-description {
+            font-size: 0.95rem;
+            color: #6b5b73;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .product-price {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .current-price {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #4a3f4f;
+            letter-spacing: 1px;
+        }
+
+        .original-price {
+            font-size: 1.3rem;
+            color: #999;
+            text-decoration: line-through;
+        }
+
+        .product-colors {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .color-dot {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .color-dot:hover {
+            border-color: #d4af37;
+            transform: scale(1.2);
+        }
+
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: #6b5b73;
+        }
+
+        .stars {
+            color: #d4af37;
+            letter-spacing: 2px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #4a3f4f;
+            color: #e8dcc7;
+            padding: 3rem 5%;
+            text-align: center;
+            margin-top: 5rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.3rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section p, .footer-section a {
+            color: #e8dcc7;
+            text-decoration: none;
+            line-height: 2;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #d4af37;
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(232, 220, 199, 0.2);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 2rem;
+            }
+
+            .collection-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .controls-section {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">
+            <img src="logo.png" alt="Veloria Logo">
+            <span class="logo-text">VELORIA</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="#new">New Arrivals</a></li>
+            <li><a href="collections.html">Collections</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="nav-icons">
+            <button id="searchBtn">🔍</button>
+            <a href="#account">👤</a>
+            <a href="#cart">🛒</a>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a href="home.html">Home</a>
+        <span>/</span>
+        <a href="collections.html">Collections</a>
+        <span>/</span>
+        <span>Evening Elegance</span>
+    </div>
+
+    <!-- Collection Header -->
+    <section class="collection-header">
+        <h1>EVENING ELEGANCE</h1>
+        <p>Sophisticated pieces designed for unforgettable nights. Each dress tells a story of grace and refined beauty.</p>
+        <div class="product-count">24 Exquisite Pieces</div>
+    </section>
+
+    <!-- Filter and Sort Controls -->
+    <section class="controls-section">
+        <div class="filter-group">
+            <span class="filter-label">Filter by Size:</span>
+            <select class="filter-select" id="sizeFilter">
+                <option value="all">All Sizes</option>
+                <option value="xs">XS</option>
+                <option value="s">S</option>
+                <option value="m">M</option>
+                <option value="l">L</option>
+                <option value="xl">XL</option>
+            </select>
+        </div>
+
+        <div class="filter-group">
+            <span class="filter-label">Sort by:</span>
+            <select class="filter-select" id="sortFilter">
+                <option value="featured">Featured</option>
+                <option value="price-low">Price: Low to High</option>
+                <option value="price-high">Price: High to Low</option>
+                <option value="newest">Newest First</option>
+            </select>
+        </div>
+    </section>
+
+    <!-- Products Grid -->
+    <section class="products-section">
+        <div class="products-grid">
+            <!-- Product 1 -->
+            <div class="product-card" data-price="299">
+                <div class="product-image">
+                    <div class="product-badge">NEW</div>
+                    <span>Midnight Satin Gown</span>
+                    <button class="product-quick-view">Quick View</button>
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Evening Gown</div>
+                    <h3 class="product-name">Midnight Satin Gown</h3>
+                    <p class="product-description">Luxurious floor-length gown with elegant draping</p>
+                    <div class="product-price">
+                        <span class="current-price">$299</span>
+                    </div>
+                    <div class="product-colors">
+                        <div class="color-dot" style="background-color: #1a1a2e;"></div>
+                        <div class="color-dot" style="background-color: #6b5b73;"></div>
+                        <div class="color-dot" style="background-color: #8b0000;"></div>
+                    </div>
+                    <div class="product-rating">
+                        <span class="stars">★★★★★</span>
+                        <span>(48 reviews)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product-card" data-price="349">
+                <div class="product-image">
+                    <div class="product-badge">BESTSELLER</div>
+                    <span>Royal Velvet Dress</span>
+                    <button class="product-quick-view">Quick View</button>
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Cocktail Dress</div>
+                    <h3 class="product-name">Royal Velvet Dress</h3>
+                    <p class="product-description">Plush velvet dress with sophisticated silhouette</p>
+                    <div class="product-price">
+                        <span class="current-price">$349</span>
+                    </div>
+                    <div class="product-colors">
+                        <div class="color-dot" style="background-color: #4a3f4f;"></div>
+                        <div class="color-dot" style="background-color: #800020;"></div>
+                        <div class="color-dot" style="background-color: #004d00;"></div>
+                    </div>
+                    <div class="product-rating">
+                        <span class="stars">★★★★★</span>
+                        <span>(92 reviews)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="product-card" data-price="279">
+                <div class="product-image">
+                    <div class="product-badge sale">SALE</div>
+                    <span>Starlight Sequin Gown</span>
+                    <button class="product-quick-view">Quick View</button>
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Evening Gown</div>
+                    <h3 class="product-name">Starlight Sequin Gown</h3>
+                    <p class="product-description">Shimmering sequins with flattering A-line cut</p>
+                    <div class="product-price">
+                        <span class="current-price">$279</span>
+                        <span class="original-price">$399</span>
+                    </div>
+                    <div class="product-colors">
+                        <div class="color-dot" style="background-color: #C0C0C0;"></div>
+                        <div class="color-dot" style="background-color: #FFD700;"></div>
+                        <div class="color-dot" style="background-color: #E0115F;"></div>
+                    </div>
+                    <div class="product-rating">
+                        <span class="stars">★★★★☆</span>
+                        <span>(67 reviews)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="product-card" data-price="425">
+                <div class="product-image">
+                    <div class="product-badge">EXCLUSIVE</div>
+                    <span>Empress Silk Gown</span>
+                    <button class="product-quick-view">Quick View</button>
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Evening Gown</div>
+                    <h3 class="product-name">Empress Silk Gown</h3>
+                    <p class="product-description">Pure silk with hand-embroidered details</p>
+                    <div class="product-price">
+                        <span class="current-price">$425</span>
+                    </div>
+                    <div class="product-colors">
+                        <div class="color-dot" style="background-color: #4a3f4f;"></div>
+                        <div class="color-dot" style="background-color: #800000;"></div>
+                    </div>
+                    <div class="product-rating">
+                        <span class="stars">★★★★★</span>
+                        <span>(125 reviews)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 5 -->
+            <div class="product-card" data-price="315">
+                <div class="product-image">
+                    <span>Luna Lace Dress</span>
+                    <button class="product-quick-view">Quick View</button>
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Cocktail Dress</div>
+                    <h3 class="product-name">Luna Lace Dress</h3>
+                    <p class="product-description">Delicate lace overlay with vintage charm</p>
+                    <div class="product-price">
+                        <span class="current-price">$315</span>
+                    </div>
+                    <div class="product-colors">
+                        <div class="color-dot" style="background-color: #1a1a2e;"></div>
+                        <div class="color-dot" style="background-color: #f5f5dc;"></div>
+                        <div class="color-dot" style="background-color: #5d3a3a;"></div>
+                    </div>
+                    <div class="product-rating">
+                        <span class="stars">★★★★★</span>
+                        <span>(73 reviews)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 6 -->
+            <div class="product-card" data-price="389">
+                <div class="product-image">
+                    <div class="product-badge">NEW</div>
+                    <span>Diamond Draped Gown</span>
+                    <button class="product-quick-view">Quick View</button>
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Evening Gown</div>
+                    <h3 class="product-name">Diamond Draped Gown</h3>
+                    <p class="product-description">Asymmetric draping with crystal accents</p>
+                    <div class="product-price">
+                        <span class="current-price">$389</span>
+                    </div>
+                    <div class="product-colors">
+                        <div class="color-dot" style="background-color: #000000;"></div>
+                        <div class="color-dot" style="background-color: #4a3f4f;"></div>
+                        <div class="color-dot" style="background-color: #696969;"></div>
+                    </div>
+                    <div class="product-rating">
+                        <span class="stars">★★★★★</span>
+                        <span>(56 reviews)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 7 -->
+            <div class="product-card" data-price="269">
+                <div class="product-image">
+                    <div class="product-badge sale">SALE</div>
+                    <span>Rose Gold Midi Dress</span>
+                    <button class="product-quick-view">Quick View</button>
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Cocktail Dress</div>
+                    <h3 class="product-name">Rose Gold Midi Dress</h3>
+                    <p class="product-description">Metallic finish with contemporary midi length</p>
+                    <div class="product-price">
+                        <span class="current-price">$269</span>
+                        <span class="original-price">$349</span>
+                    </div>
+                    <div class="product-colors">
+                        <div class="color-dot" style="background-color: #B76E79;"></div>
+                        <div class="color-dot" style="background-color: #FFD700;"></div>
+                        <div class="color-dot" style="background-color: #C0C0C0;"></div>
+                    </div>
+                    <div class="product-rating">
+                        <span class="stars">★★★★☆</span>
+                        <span>(41 reviews)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 8 -->
+            <div class="product-card" data-price="459">
+                <div class="product-image">
+                    <div class="product-badge">EXCLUSIVE</div>
+                    <span>Celestial Beaded Gown</span>
+                    <button class="product-quick-view">Quick View</button>
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Evening Gown</div>
+                    <h3 class="product-name">Celestial Beaded Gown</h3>
+                    <p class="product-description">Hand-beaded masterpiece with celestial motifs</p>
+                    <div class="product-price">
+                        <span class="current-price">$459</span>
+                    </div>
+                    <div class="product-colors">
+                        <div class="color-dot" style="background-color: #1a1a2e;"></div>
+                        <div class="color-dot" style="background-color: #000080;"></div>
+                    </div>
+                    <div class="product-rating">
+                        <span class="stars">★★★★★</span>
+                        <span>(89 reviews)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Customer Care</h3>
+                <p><a href="#">Contact Us</a></p>
+                <p><a href="#">Shipping Info</a></p>
+                <p><a href="#">Returns</a></p>
+                <p><a href="#">Size Guide</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>About Veloria</h3>
+                <p><a href="#">Our Story</a></p>
+                <p><a href="#">Sustainability</a></p>
+                <p><a href="#">Careers</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>Stay Connected</h3>
+                <p>Subscribe to our newsletter for exclusive offers</p>
+                <p style="margin-top: 1rem;">📧 newsletter@veloria.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Veloria. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Sort functionality
+        const sortFilter = document.getElementById('sortFilter');
+        const productsGrid = document.querySelector('.products-grid');
+
+        sortFilter.addEventListener('change', (e) => {
+            const sortValue = e.target.value;
+            const products = Array.from(document.querySelectorAll('.product-card'));
+
+            if (sortValue === 'price-low') {
+                products.sort((a, b) => {
+                    return parseInt(a.dataset.price) - parseInt(b.dataset.price);
+                });
+            } else if (sortValue === 'price-high') {
+                products.sort((a, b) => {
+                    return parseInt(b.dataset.price) - parseInt(a.dataset.price);
+                });
+            }
+
+            products.forEach(product => {
+                productsGrid.appendChild(product);
+            });
+        });
+
+        // Quick view functionality
+        const quickViewButtons = document.querySelectorAll('.product-quick-view');
+        
+        quickViewButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const productName = button.parentElement.querySelector('span').textContent;
+                alert(`Quick view for: ${productName}\n\nFull product detail page coming soon!`);
+            });
+        });
+
+        // Product card click
+        const productCards = document.querySelectorAll('.product-card');
+        
+        productCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const productName = card.querySelector('.product-name').textContent;
+                console.log(`Navigating to product: ${productName}`);
+                // Add navigation to product detail page here
+            });
+        });
+    </script>
+</body>
+</html>
