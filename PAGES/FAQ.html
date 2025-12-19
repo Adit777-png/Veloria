@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - Veloria</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', 'Georgia', serif;
+            background: linear-gradient(to bottom, #f8f4f0 0%, #e8dcc7 50%, #f8f4f0 100%);
+            color: #4a3f4f;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            background: linear-gradient(135deg, #f8f4f0 0%, #e8dcc7 100%);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(184, 134, 11, 0.1);
+            border-bottom: 2px solid #c9b037;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo img {
+            height: 60px;
+            width: auto;
+        }
+
+        .logo-text {
+            font-size: 2rem;
+            background: linear-gradient(135deg, #b8860b, #daa520);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 3px;
+            font-weight: 300;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #4a3f4f;
+            text-decoration: none;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #b8860b, #daa520);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #b8860b;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-icons button,
+        .nav-icons a {
+            background: none;
+            border: none;
+            color: #4a3f4f;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .nav-icons button:hover,
+        .nav-icons a:hover {
+            color: #b8860b;
+            transform: scale(1.1);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, #b8860b 0%, #daa520 50%, #c9b037 100%);
+            padding: 5rem 5%;
+            text-align: center;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '✦';
+            position: absolute;
+            font-size: 20rem;
+            opacity: 0.1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(45deg);
+        }
+
+        .hero-section h1 {
+            font-size: 4rem;
+            font-weight: 300;
+            letter-spacing: 6px;
+            margin-bottom: 1rem;
+            position: relative;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .hero-section p {
+            font-size: 1.3rem;
+            letter-spacing: 2px;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+            opacity: 0.95;
+        }
+
+        /* FAQ Container */
+        .faq-container {
+            max-width: 900px;
+            margin: 4rem auto;
+            padding: 0 5%;
+        }
+
+        .faq-intro {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .faq-intro h2 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+            color: #b8860b;
+            margin-bottom: 1rem;
+        }
+
+        .faq-intro p {
+            font-size: 1.1rem;
+            color: #6b5b73;
+            line-height: 1.8;
+        }
+
+        /* FAQ Categories */
+        .faq-category {
+            margin-bottom: 3rem;
+        }
+
+        .category-title {
+            font-size: 1.8rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            color: #4a3f4f;
+            margin-bottom: 1.5rem;
+            padding-left: 1rem;
+            border-left: 4px solid #c9b037;
+        }
+
+        /* FAQ Items */
+        .faq-item {
+            background: white;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(184, 134, 11, 0.1);
+            border: 1px solid rgba(184, 134, 11, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            box-shadow: 0 4px 20px rgba(184, 134, 11, 0.2);
+            border-color: #c9b037;
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+            user-select: none;
+        }
+
+        .faq-question:hover {
+            background: linear-gradient(135deg, rgba(184, 134, 11, 0.05), rgba(218, 165, 32, 0.05));
+        }
+
+        .faq-question h3 {
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            color: #4a3f4f;
+            flex: 1;
+        }
+
+        .faq-icon {
+            font-size: 1.5rem;
+            color: #c9b037;
+            transition: transform 0.3s ease;
+            margin-left: 1rem;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            padding: 0 1.5rem;
+            background: linear-gradient(to bottom, #f8f4f0, #fff);
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding: 1.5rem;
+        }
+
+        .faq-answer p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #6b5b73;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: linear-gradient(135deg, #4a3f4f 0%, #6b5b73 100%);
+            padding: 4rem 5%;
+            text-align: center;
+            color: #e8dcc7;
+            margin-top: 5rem;
+        }
+
+        .contact-section h2 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+        }
+
+        .contact-section p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-button {
+            display: inline-block;
+            padding: 1rem 3rem;
+            background: linear-gradient(135deg, #c9b037, #daa520);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(201, 176, 55, 0.3);
+        }
+
+        .contact-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(201, 176, 55, 0.5);
+            background: linear-gradient(135deg, #daa520, #c9b037);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #f8f4f0 0%, #e8dcc7 100%);
+            color: #4a3f4f;
+            padding: 3rem 5%;
+            text-align: center;
+            border-top: 2px solid #c9b037;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.3rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            color: #b8860b;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #6b5b73;
+            text-decoration: none;
+            line-height: 2;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #b8860b;
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(184, 134, 11, 0.2);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            color: #6b5b73;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .faq-container {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='70' font-size='60' fill='%23b8860b'%3E👑%3C/text%3E%3C/svg%3E" alt="Veloria Logo">
+            <span class="logo-text">VELORIA</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="#new">New Arrivals</a></li>
+            <li><a href="collections.html">Collections</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+        </ul>
+        <div class="nav-icons">
+            <button id="searchBtn">🔍</button>
+            <a href="#account">👤</a>
+            <a href="cart.html">🛒</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <h1>FREQUENTLY ASKED QUESTIONS</h1>
+        <p>Everything you need to know about Veloria. We're here to help you find the perfect gown.</p>
+    </section>
+
+    <!-- FAQ Container -->
+    <div class="faq-container">
+        <div class="faq-intro">
+            <h2>How Can We Help You?</h2>
+            <p>Find answers to our most commonly asked questions below. Can't find what you're looking for? Our customer care team is always ready to assist.</p>
+        </div>
+
+        <!-- Orders & Shipping -->
+        <div class="faq-category">
+            <h2 class="category-title">Orders & Shipping</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>How long does shipping take?</h3>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Standard shipping typically takes 5-7 business days within the continental US. Express shipping (2-3 business days) and overnight options are also available at checkout. International shipping times vary by destination, typically 10-15 business days.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Do you offer free shipping?</h3>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes! We offer complimentary standard shipping on all orders over $200 within the United States. For orders under $200, standard shipping is $15. International shipping rates vary by location.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Can I track my order?</h3>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Absolutely! Once your order ships, you'll receive a confirmation email with a tracking number. You can also log into your account to view real-time tracking information for all your orders.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Returns & Exchanges -->
+        <div class="faq-category">
+            <h2 class="category-title">Returns & Exchanges</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>What is your return policy?</h3>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>We accept returns within 30 days of delivery for unworn, unaltered items with original tags attached. All items must be in their original condition. Return shipping is free for US customers. Once we receive your return, refunds are processed within 5-7 business days.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>How do I exchange an item?</h3>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>To exchange an item, simply initiate a return through your account and place a new order for your desired size or style. We'll process your refund as soon as we receive the original item, and your new order will ship immediately.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Are sale items returnable?</h3>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes! Sale items follow the same return policy as regular-priced items. They must be returned within 30 days in unworn, unaltered condition with original tags attached.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sizing & Fit -->
+        <div class="faq-category">
+            <h2 class="category-title">Sizing & Fit</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>How do I find my perfect size?</h3>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Each product page includes a detailed size guide with measurements. We recommend measuring yourself and comparing to our size chart. If you're between sizes, we suggest sizing up for a more comfortable fit. Our customer care team is also available to provide personalized sizing advice.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Do you offer custom alterations?</h3>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>While we don't offer in-house alterations, we can recommend trusted tailors in your area. Many of our gowns are designed with alterations in mind, featuring extra seam allowances for easy adjustments.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>What if my dress doesn't fit?</h3>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>No worries! You can return or exchange any unworn, unaltered dress within 30 days. We offer free return shipping for US customers, making size exchanges completely hassle-free.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Care -->
+        <div class="faq-category">
+            <h2 class="category-title">Product Care</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>How should I care for my Veloria gown?</h3>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Each gown comes with specific care instructions on the label. Generally, we recommend dry cleaning for our luxury pieces to maintain their beauty and longevity. Some items may be hand-washable - always check the care label first.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>How do I store my gown?</h3>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Store your gown in a breathable garment bag in a cool, dry place. Avoid plastic bags which can trap moisture. For heavily beaded or embellished pieces, lay flat when possible to maintain their shape.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Payment & Security -->
+        <div class="faq-category">
+            <h2 class="category-title">Payment & Security</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>What payment methods do you accept?</h3>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>We accept all major credit cards (Visa, Mastercard, American Express, Discover), PayPal, Apple Pay, and Google Pay. All transactions are processed securely through encrypted payment gateways.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Is my payment information secure?</h3>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Absolutely. We never store your credit card details on our servers - all payment processing is handled securely by certified payment processors.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Do you offer payment plans?</h3>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes! </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <h2>Still Have Questions?</h2>
+        <p>Our customer care team is here to help. Reach out anytime and we'll get back to you within 24 hours.</p>
+        <a href="contactus.html" class="contact-button">Contact Us</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Customer Care</h3>
+                <p><a href="#">Contact Us</a></p>
+                <p><a href="#">Shipping Info</a></p>
+                <p><a href="#">Returns</a></p>
+                <p><a href="#">Size Guide</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>About Veloria</h3>
+                <p><a href="#">Our Story</a></p>
+                <p><a href="#">Sustainability</a></p>
+                <p><a href="#">Careers</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>Stay Connected</h3>
+                <p>Subscribe to our newsletter for exclusive offers</p>
+                <p style="margin-top: 1rem;">📧 newsletter@veloria.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Veloria. Timeless. Feminine. You.</p>
+        </div>
+    </footer>
+
+    <script>
+        const faqItems = document.querySelectorAll('.faq-item');
+
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            
+            question.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                
+                // Close all items
+                faqItems.forEach(i => i.classList.remove('active'));
+                
+                // Open clicked item if it wasn't active
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
